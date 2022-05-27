@@ -10,6 +10,7 @@ posts = Blueprint('posts', __name__, template_folder='templates')
 @posts.route('/')
 def index():
     posts = Post.query.all()
+    print(posts)
     return render_template('posts/index.html', posts=posts)
 
 
@@ -41,7 +42,7 @@ def posts_category(category_id):
     # Получить все посты из одной категории
     posts = Post.query.filter(Post.category_id == category_id)
     return render_template(
-        'posts/posts_category.html',
+        'posts/category.html',
         posts=posts
     )
 
@@ -69,6 +70,9 @@ def upload():
 # Разобраться как выводить и сохранять изображения
 # Пересмотреть вебинар по джанге и прочитать по джанге записанные вопросы
 
+# === Создать скрипт по наполнению бд (+ работает но при работе вылазит ошибка)
+
+
 # ===Вьюхи
 # 1. Все посты на главной
 # 2. Все посты по определенной категории
@@ -86,5 +90,6 @@ def upload():
 
 
 # ===Шаблоны
-# 1. Разделить на логические шаблоны
+# 1. Разделить на логические шаблоны (главная да, категории доделать)
 # 2. Вывести заготовки и протестировать что вьюхи работают корректно
+# 3. Починить отображение стилей (футер) +

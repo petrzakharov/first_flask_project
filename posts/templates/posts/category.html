@@ -1,32 +1,12 @@
-{% extends 'base.html' %}
-{% set categories = "передать тут категории" %}
-{% include 'posts/header.html'%} 
-{% include 'posts/slider.html'%} 
-{% block content %}
-<!-- об авторе-->
-<div class="container">
-    <div class="row">
+{% extends 'base.html' %} {% set categories = "передать тут категории" %} {% set
+active_category = "передать тут категории" %} {% include 'posts/header.html'%}
+{% include 'posts/slider.html'%} {% block content %}
+
+<div class="row">
     <div class="col-md-12">
-        <div class="about-author">
-        <h3 class="about-author-title">
-            <a href="" class="about-author">Что-то про блог и автора</a>
-        </h3>
-        <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore
-            dignissimos dolorum ut totam libero laboriosam eius. Distinctio
-            deserunt ullam minus tempore? Cum nostrum, voluptas facilis
-            dolorum labore aut? Fugiat eligendi quidem recusandae consequatur
-            quisquam, consequuntur obcaecati adipisci. Animi similique fugit
-            reiciendis alias inventore itaque voluptas nesciunt ratione
-            excepturi voluptates repellendus, ipsam repudiandae exercitationem
-            sed accusamus necessitatibus aliquam, ipsa pariatur quod. Ab,
-            voluptates minima! Necessitatibus repellendus nobis molestiae
-        </p>
-        </div>
-    </div>
+      <p align="center" class="category-title">Все посты по категории {{ posts[0].category.name }}</p>
     </div>
 </div>
-<!-- об авторе-->
 
     <!-- 4 больших карточки с постами -->
     <div class="grid-posts">
@@ -72,4 +52,6 @@
         </div>
       </div>
     </div>
+
+
 {% endblock %}

@@ -21,10 +21,16 @@ class Post(db.Model):
     updated_on = db.Column(
         db.DateTime, default=datetime.now(), onupdate=datetime.now()
     )
+    tags = db.relationship(
+        'Tag', secondary=post_tags, backref=db.backref('posts_tag', lazy='dynamic')
+    )
+
+    def __init__(self, *args, **kwargs):
+        super(Post, self).__init__(*args, **kwargs)
+        self.get_slug()
 
     def get_slug(self):
-        if self.title:
-            self.slug = slugify(self.title)
+        self.slug = slugify(self.title)
 
     def __repr__(self):
         return f'Post id: {self.id}, title: {self.title}'
@@ -43,7 +49,7 @@ class Category(db.Model):
 class Tag(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50))
-    posts = db.relationship('Post', secondary=post_tags, backref='tags')
+    posts = db.relationship('Post', secondary=post_tags, backref='tags_posts')
     created_on = db.Column(db.DateTime, default=datetime.now())
 
     def __repr__(self):
@@ -55,3 +61,7 @@ class Tag(db.Model):
 
 # Для загрузки и показа изображений необходимо как-то использовать Flask-Uploads
 # Похоже, что отдельное поле в БД для изображения ненужно
+
+
+# Добавить констрейнт на уникальность для Tags и Категорий.
+# Категории желательно выбирать из числа предустановленных, как сделать?
