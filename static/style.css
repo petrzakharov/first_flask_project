@@ -1,0 +1,73 @@
+body {
+    min-width: 320px;
+    font-size: 14px;
+    color: #626262;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+img {
+    max-width: 100%;
+    height: auto;
+}
+a.about-author {
+    color: #626262;
+}
+a {
+    color: #ffffff;
+}
+
+a:hower{
+    color: #626262;
+}
+h6.card-category{
+    color: #6262626d;
+    margin-top: 10px;
+}
+header .nav-item {
+    text-transform: uppercase;
+}
+.container.slider {
+    margin-bottom: 20px;
+}
+.grid-posts {
+    margin: 40px 0px 40px 0px;
+
+}
+.card {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 0;
+}
+.load-more {
+    margin-top: 20px;
+    width: 100%;
+}
+.col nav {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+}
+.category-name {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+}
+form {
+    padding-top: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.author-mail {
+    padding-left: 10px;
+}
+footer {
+    background-color: #343A3F;
+    margin-top: auto;
+}
+.footer-about{
+    color:white;
+}
+.card-text {
+    padding-top: 30px;
+}
