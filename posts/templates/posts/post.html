@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% set categories = categories %}
+{% include 'posts/header.html'%} 
+{% block content %}
+    <!-- просмотр поста -->
+      <div class="container">
+          <div class="row">
+            <div class="col">
+              <!-- <h8 class="card-header">{{ category }}</h5> -->
+              <div class="card-body">
+                <h3 class="card-title">{{ post.title }}</h5>
+                <img
+                  class="card-img-top"
+                  src="{% if not post.image_url %} https://i.picsum.photos/id/1015/6000/4000.jpg?hmac=aHjb0fRa1t14DTIEBcoC12c5rAXOSwnVlaA5ujxPQ0I {% else %} {{ post.image_url }} {% endif %}"
+                  alt="Card image cap"
+                />
+                <p class="author-text">Автор: {{ post.author }}</p>
+                <p class="card-text">{{ post.text }}</p>
+                <a href="{{ url_for('posts.edit_post', slug=post.slug) }}" class="btn btn-secondary">Отредактировать</a>
+              </div>
+            </div>      
+          </div>
+      </div>
+    <!-- просмотр поста -->
+{% endblock %}

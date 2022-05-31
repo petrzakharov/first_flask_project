@@ -12,10 +12,10 @@ post_tags = db.Table('post_tags',
 
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    author = db.Column(db.String(50))
-    title = db.Column(db.String(140))
-    text = db.Column(db.Text)
-    slug = db.Column(db.String(140))
+    author = db.Column(db.String(50), nullable=False)
+    title = db.Column(db.String(140), nullable=False, unique=True)
+    text = db.Column(db.Text, unique=True)
+    slug = db.Column(db.String(140), unique=True)
     category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
     created_on = db.Column(db.DateTime, default=datetime.now())
     updated_on = db.Column(
@@ -24,6 +24,7 @@ class Post(db.Model):
     tags = db.relationship(
         'Tag', secondary=post_tags, backref=db.backref('posts_tag', lazy='dynamic')
     )
+    image_url = db.Column(db.String(300))
 
     def __init__(self, *args, **kwargs):
         super(Post, self).__init__(*args, **kwargs)
@@ -38,7 +39,7 @@ class Post(db.Model):
 
 class Category(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50))
+    name = db.Column(db.String(50), nullable=False, unique=True)
     created_on = db.Column(db.DateTime, default=datetime.now())
     posts = db.relationship('Post', backref='category')
 
@@ -48,7 +49,7 @@ class Category(db.Model):
 
 class Tag(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50))
+    name = db.Column(db.String(50), nullable=False, unique=True)
     posts = db.relationship('Post', secondary=post_tags, backref='tags_posts')
     created_on = db.Column(db.DateTime, default=datetime.now())
 
@@ -61,7 +62,3 @@ class Tag(db.Model):
 
 # Для загрузки и показа изображений необходимо как-то использовать Flask-Uploads
 # Похоже, что отдельное поле в БД для изображения ненужно
-
-
-# Добавить констрейнт на уникальность для Tags и Категорий.
-# Категории желательно выбирать из числа предустановленных, как сделать?
