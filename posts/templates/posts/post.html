@@ -14,7 +14,12 @@
                   src="{% if not post.image_url %} https://i.picsum.photos/id/1015/6000/4000.jpg?hmac=aHjb0fRa1t14DTIEBcoC12c5rAXOSwnVlaA5ujxPQ0I {% else %} {{ post.image_url }} {% endif %}"
                   alt="Card image cap"
                 />
-                <p class="author-text">Автор: {{ post.author }}</p>
+                <p class="author-text"><b>Автор: </b> {{ post.author }}</p>
+                <p class="author-text"><b>Теги: </b> 
+                  {% for tag in post.tags %}
+                   {{ tag.name }} &#9679;
+                  {% endfor %}
+                </p>
                 <p class="card-text">{{ post.text }}</p>
                 <a href="{{ url_for('posts.edit_post', slug=post.slug) }}" class="btn btn-secondary">Отредактировать</a>
               </div>

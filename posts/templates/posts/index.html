@@ -43,7 +43,7 @@ include 'posts/header.html'%} {% include 'posts/slider.html'%} {% block content
           <div class="card-block">
             <h6 class="card-category">{{ post.category.name }}</h6>
             <h4 class="card-title">{{ post.title }}</h4>
-            <p class="card-text">{{ post.text }}</p>
+            <p class="card-text">{{ post.text[:200] }}...</p>
           </div>
         </div>
       </div>

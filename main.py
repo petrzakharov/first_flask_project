@@ -1,9 +1,9 @@
-from app import app, db
-import view
-from posts.blueprint import posts
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
-from models import Post, Category, Tag
+
+from app import app, db
+from models import Category, Post, Tag
+from posts.blueprint import posts
 
 app.register_blueprint(posts, url_prefix='/blog')
 admin = Admin(app, name='microblog', template_mode='bootstrap3')

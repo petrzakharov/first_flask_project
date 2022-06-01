@@ -1,12 +1,14 @@
-from wtforms import Form, StringField, TextAreaField, FormField, SelectField, SelectMultipleField, FieldList
+from wtforms import (
+    Form,
+    SelectField,
+    SelectMultipleField,
+    StringField,
+    TextAreaField,
+    URLField,
+)
+from wtforms.validators import InputRequired
+
 from models import Category, Tag
-from wtforms import URLField
-
-
-# class PostForm(Form):
-#     title = StringField('Название поста')
-#     text = TextAreaField('Текст поста')
-#     author = StringField('Автор')
 
 
 class CategoryForm(Form):
@@ -14,15 +16,17 @@ class CategoryForm(Form):
 
 
 class TagForm(Form):
-    name = StringField('Название тега')
+    name = StringField('Название тега', [InputRequired()])
 
 
 class PostForm(Form):
-    author = StringField('Юзернейм автора')
-    title = StringField('Название поста')
-    text = TextAreaField('Текст')
+    author = StringField('Юзернейм автора', [InputRequired()])
+    title = StringField('Название поста', [InputRequired()])
+    text = TextAreaField('Текст', [InputRequired()])
     category_id = SelectField(
-        'Категория', choices=[(g.id, g.name) for g in Category.query.all()]
+        'Категория',
+        choices=[(g.id, g.name) for g in Category.query.all()],
+        validators=[InputRequired()]
     )
     tag = SelectMultipleField(
         'Теги', choices=[(g.id, g.name) for g in Tag.query.all()]

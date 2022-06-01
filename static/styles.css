@@ -22,7 +22,7 @@ a:hower{
 }
 h6.card-category{
     color: #6262626d;
-    margin-top: 10px;
+    margin-top: 5px;
 }
 header .nav-item {
     text-transform: uppercase;
@@ -31,7 +31,7 @@ header .nav-item {
     margin-bottom: 20px;
 }
 .grid-posts {
-    margin: 40px 0px 40px 0px;
+    margin: 20px 0px 40px 0px;
 
 }
 .card {
@@ -75,4 +75,8 @@ footer {
     font-size: 30px;
     font-weight: bold;
 
+}
+
+.card-text{
+    padding-top: 10px;
 }

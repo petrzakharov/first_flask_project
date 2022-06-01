@@ -1,5 +1,4 @@
-{% extends 'base.html' %} {% set categories = categories %} {% set
-active_category = "передать тут категории" %} {% include 'posts/header.html'%}
+{% extends 'base.html' %} {% set categories = categories %} {% include 'posts/header.html'%}
 {% include 'posts/slider.html'%} {% block content %}
 
 <div class="row">
@@ -12,15 +11,14 @@ active_category = "передать тут категории" %} {% include 'po
         тегу
         {% endif %}
         
-        {{ posts[0].category.name }}</p>
+        {{ posts.items[0].category.name }}</p>
     </div>
 </div>
-
 <!-- 4 больших карточки с постами -->
 <div class="grid-posts">
   <div class="container">
     <div class="row">
-      {% for post in posts %}
+      {% for post in posts.items %}
       <div class="col-md-6">
         <div class="card">
           <a href="{{ url_for('posts.post_detail', slug=post.slug) }}">
@@ -39,7 +37,41 @@ active_category = "передать тут категории" %} {% include 'po
       </div>
       {% endfor %}
     </div>
+        <div class="row">
+      <div class="col nav">
+        <nav aria-label="Page navigation example" class="navigation-pagination">
+          <ul class="pagination">
+            <li
+              {% if not posts.has_prev %}
+              class="page-item disabled"
+              {% else %}
+              class="page-item"
+              {% endif %}
+            >
+              <a class="page-link" href="./?page={{ posts.prev_num }}"
+                >Раньше</a
+              >
+            </li>
+
+            {% for post in posts.iter_pages() %}
+              <li {% if post == posts.page %} class="page-item disabled" {% else %} class="page-item" {% endif %}>
+                <a class="page-link" href="./?page={{ post }}">{{ post }}</a>
+              </li>
+            {% endfor %}
+
+            <li
+              {% if not posts.has_next %}
+              class="page-item disabled"
+              {% else %}
+              class="page-item"
+              {% endif %}
+            >
+              <a class="page-link" href="./?page={{ posts.next_num }}">Позже</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
   </div>
 </div>
-
 {% endblock %}

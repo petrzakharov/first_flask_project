@@ -1,9 +1,9 @@
-from distutils.command.config import config
-from flask import Flask
-from config import Configuration
-from flask_sqlalchemy import SQLAlchemy
 import click
+from flask import Flask
 from flask_migrate import Migrate
+from flask_sqlalchemy import SQLAlchemy
+
+from config import Configuration
 
 app = Flask(__name__)
 app.config.from_object(Configuration)
@@ -16,9 +16,10 @@ migrate: Migrate(app, db)
 
 @ click.command(name='add_mockup')
 def add_mockup():
-    from models import Post, Category, Tag
     import random
+
     from app import db
+    from models import Category, Post, Tag
     posts = [
         {'title': 'Post_111', "author": 'ivan', "text": 'OK OK OK POST'},
         {'title': 'Post_222', "author": 'oleg', "text": 'NORM NORM POST'},
@@ -53,7 +54,9 @@ def add_mockup():
             title=post['title'], author=post['author'], text=post['text']
         )
         post_object.category_id = random.choice(categories_ids)
-        for one_tag in random.sample(tags_obj, random.randint(0, len(tags_obj))):
+        for one_tag in random.sample(
+            tags_obj, random.randint(0, len(tags_obj))
+        ):
             post_object.tags.append(one_tag)
         db.session.add(post_object)
         db.session.commit()

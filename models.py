@@ -1,6 +1,8 @@
-from app import db
 from datetime import datetime
+
 from slugify import slugify
+
+from app import db
 
 post_tags = db.Table('post_tags',
                      db.Column('post_id', db.Integer,
@@ -22,7 +24,9 @@ class Post(db.Model):
         db.DateTime, default=datetime.now(), onupdate=datetime.now()
     )
     tags = db.relationship(
-        'Tag', secondary=post_tags, backref=db.backref('posts_tag', lazy='dynamic')
+        'Tag', secondary=post_tags, backref=db.backref(
+            'posts_tag', lazy='dynamic'
+        )
     )
     image_url = db.Column(db.String(300))
 
@@ -55,10 +59,3 @@ class Tag(db.Model):
 
     def __repr__(self):
         return f'Tag id: {self.id} Tag name: {self.name}'
-
-
-# создание форм фласк https://www.youtube.com/watch?v=lg1k2klqkdQ
-# https://flask.palletsprojects.com/en/2.1.x/patterns/fileuploads/
-
-# Для загрузки и показа изображений необходимо как-то использовать Flask-Uploads
-# Похоже, что отдельное поле в БД для изображения ненужно
