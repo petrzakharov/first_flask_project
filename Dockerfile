@@ -9,6 +9,9 @@ RUN pip install -r requirements.txt
 # RUN pip install "greenlet<0.4.17"
 
 COPY . .
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> new
