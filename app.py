@@ -14,7 +14,7 @@ db = SQLAlchemy(app)
 migrate: Migrate(app, db)
 
 
-@ click.command(name='add_mockup')
+@click.command(name='add_mockup')
 def add_mockup():
     import random
 
