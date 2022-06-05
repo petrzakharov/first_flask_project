@@ -142,5 +142,3 @@ def edit_post(slug):
     return render_template(
         'posts/edit_post.html', post=post, form=form, categories=categories
     )
-
-# Контейнеры, докер
