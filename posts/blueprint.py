@@ -91,7 +91,6 @@ def post_detail(slug):
 
 @posts.route('/category/<int:category_id>')
 def posts_category(category_id):
-    # Получить все посты из одной категории
     category = Tag.query.get_or_404(category_id, 'Страница не найдена')
     posts = Post.query.filter(Post.category_id == category.id)
     categories = Category.query.all()
@@ -101,18 +100,17 @@ def posts_category(category_id):
     else:
         page_number = 1
     part_posts = posts.paginate(page=page_number, per_page=4)
-    print(posts)
     return render_template(
         'posts/category.html',
         posts=part_posts,
         type='category',
-        categories=categories
+        categories=categories,
+        category=category
     )
 
 
 @posts.route('/tag/<int:tag_id>')
 def posts_tag(tag_id):
-    # Получить все посты из одного тега
     tag = Tag.query.get_or_404(tag_id, 'Страница не найдена')
     posts = Post.query.filter(Post.tags.contains(tag))
     categories = Category.query.all()
